@@ -9,34 +9,17 @@ Original file is located at
 # CPTS 440: Spam Email Detector Project
 
 Group Members: Skyllar Estill, Anne Tansengco, Emma Fletcher, and Molly Iverson
-
-## Imports
 """
 
 import pandas as pd
-from helper import test_accuracy_with_stats
+from accuracy import test_accuracy_with_stats
 import numpy as np
 import nltk
 from nltk.corpus import stopwords
 
+from preprocess import preprocess_data
+
 nltk.download('stopwords')
-
-# Data Pre-processing
-# Remove all puncuation and any common english word (such as pronouns and articles). 
-# A list of these words can be found in the nltk.corpus library.
-
-def contains_letter(word):
-    return any(char.isalpha() for char in word)
-
-def is_not_stopword(word):
-  stop_words = set(stopwords.words('english'))
-  return word.lower() not in stop_words
-
-def preprocess_data(email):
-  array = email.split(" ")
-  filtered_words = [word for word in array if contains_letter(word)]
-  filtered_no_stop_words = [word for word in filtered_words if is_not_stopword(word)]
-  return " ".join(filtered_no_stop_words)
 
 df = pd.read_csv("./emails.csv")  # reads the csv with the proper column names
 df['text'] = df['text'].apply(preprocess_data)  # puts the processed data back into the df. this is so we keep the labels for if the emails are spam or ham
@@ -137,15 +120,13 @@ def data_values(data):
   values = data['spam'].tolist()  # changed from .values
   return values
 
+# Running KNN algorithm and testing the accuracy
 test_data, training_data = split_data(df)
 spam_or_ham_values_calc = knn(training_data, test_data, 11)
 spam_or_ham_values_actual = data_values(test_data)
 test_accuracy_with_stats(spam_or_ham_values_actual, spam_or_ham_values_calc)
 
 # Finding optimal K value
-
-# df = pd.read_csv("emails_smaller_set.csv")  # reads the csv with the proper column names
-# df['text'] = df['text'].apply(preprocess_data)  # puts the processed data back into the df. this is so we keep the labels for if the emails are spam or ham
 test_data, training_data = split_data(df)
 for k in range (50):
     spam_or_ham_values_calc = knn(training_data, test_data, k)
