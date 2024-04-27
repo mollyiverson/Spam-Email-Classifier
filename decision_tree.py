@@ -166,14 +166,4 @@ c45.tree = c45.buildTree(X_train, Y_train)
 
 predictionVals = c45.predictions(X_test)
 
-totalCorrect = 0
-index=0
-total = len(Y_test)
-for val in predictionVals:
-  if val == Y_test[index]:
-    totalCorrect+=1
-  index+=1
-
 test_accuracy_with_stats(Y_test, predictionVals)
-
-print(totalCorrect/total)
