@@ -14,12 +14,9 @@ Group Members: Skyllar Estill, Anne Tansengco, Emma Fletcher, and Molly Iverson
 import pandas as pd
 from accuracy import test_accuracy_with_stats
 import numpy as np
-import nltk
 from nltk.corpus import stopwords
 
 from preprocess import preprocess_data
-
-nltk.download('stopwords')
 
 df = pd.read_csv("./emails.csv")  # reads the csv with the proper column names
 df['text'] = df['text'].apply(preprocess_data)  # puts the processed data back into the df. this is so we keep the labels for if the emails are spam or ham

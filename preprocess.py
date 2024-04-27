@@ -1,4 +1,6 @@
+import nltk
 from nltk.corpus import stopwords
+nltk.download('stopwords')
 
 # Data Pre-processing
 # Remove all puncuation and any common english word (such as pronouns and articles). 
