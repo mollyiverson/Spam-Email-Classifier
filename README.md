@@ -1,4 +1,4 @@
-# 440 Project
+# Spam Email Classifier
 
 Comparison of KNN algorithm, Naive Bayes Classifier, and C4.5 Decision Tree algorithm for email spam detection.
 
